@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="static/table.css">
+</head>
+<body>
+<h1 class="domain">Domain: <span class="dom">{{ domain }}</span></h1>
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Record type</th>
+          <th>DNS Records</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name Servers: </td>
+          <td>
+            {% for name_server in ns %}
+              - {{ name_server }}
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td>A and cName records: </td>
+          <td>
+            {% for record in a %}
+              - {{ record }}
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td>MX Records: </td>
+          <td>
+            {% if mx_len <= 2 %}
+              - {{ mx }}
+            {% else %}
+              {% for record in mx %}
+                - {{ record }}
+                <br>
+              {% endfor %}
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>TXT records: </td>
+          <td>
+            {% for record in txt %}
+              - {{ record }}
+              <br>
+            {% endfor %}
+          </td>
+        <tr>
+          <td>DNS SEC Record: </td>
+          <td>
+            {% for record in dnssec %}
+              {{ record }}
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
